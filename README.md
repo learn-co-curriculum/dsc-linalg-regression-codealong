@@ -1,5 +1,5 @@
 
-# Regression Analysis using Linear Algebra and Numpy - code along 
+# Regression Analysis using Linear Algebra and Numpy - Code Along 
 
 ## Introduction
 
@@ -7,12 +7,13 @@ In the previous sections, we have seen that in statistical modeling, regression 
 [You are advised to follow this link for a deeper mathematical and geometric understanding of the topic](http://math.mit.edu/~gs/linearalgebra/ila0403.pdf). Here we shall try to keep things in a more data oriented domain.
 
 
-
 ## Objectives
 
-* Understand the role of linear algebra towards regression modeling.
-* Apply linear algebra to fit a function to data, describing linear mappings between input and output variables.
-* Develop simple linear algebraic models for simple and multivariate regression.
+You will be able to: 
+
+* Understand the role of linear algebra towards regression modeling
+* Apply linear algebra to fit a function to data, describing linear mappings between input and output variables
+* Develop simple linear algebraic models for simple and multivariate regression
 
 
 ## Regression Analysis
@@ -45,7 +46,7 @@ plt.show()
 # Code here 
 ```
 
-### Fitting a model to data - A quick refresher
+## Fitting a model to data - A quick refresher
 
 The purpose of linear regression would be to fit a mathematical model (a straight line) in the parameter space  that best describes the relationship between day and sales. Simple linear regression attempts to fit a line (in a 2 dimensional space) to describe the relationship between data variables as shown in the example below:
 
@@ -113,7 +114,7 @@ The numbers we see reflect our slope (0.5) and intercept values (0.66).
 
 The line drawn above using this built in regression model clearly does not touch all the data points. Hence this would be considered an **APPROXIMATION** of the function we are trying to find. Now let's see how to achieve the same functionality with matrix algebra instead of polyfit function. 
 
-### Create matrices and vectors
+## Create matrices and vectors
 
 A linear system like above tells us that we are now in a linear algebra domain. And we should only have to deal with a few vectors and matrices in order to solve such problems. 
 
@@ -133,7 +134,7 @@ Unfortunately, we already know $b$ does not fit our model perfectly. That means 
 
 > **The goal is to choose the vector x for unknown variables to make *e* as small as possible**. 
 
-### Ordinary least squares 
+## Ordinary least squares 
 
 A common measure to find and minimize the value of this error is called *Ordinary Least Squares*. 
 
@@ -176,7 +177,7 @@ The above description can be summarized as:
 
 *Using linear regression is just trying to solve **Xb = y**. But if any of the observed points deviate from the model, we cant find a direct solution. So we multiply both sides by the transpose of X. The transpose of X times X will always allow us to solve for unknown variables.*
 
-### Calculate an OLS regression line
+## Calculate an OLS regression line
 
 Let's use above formula to calculate a solution for our toy problem
 ```python
@@ -219,7 +220,7 @@ plt.show()
 
 Success.. There we have it, an approximated line function. Just like the one we saw with polyfit, by using simple matrix algebra. 
 
-### Regression with multiple variables
+## Regression with multiple variables
 
 So above we saw how with simple regression we can draw a line on a 2d space to describe data relationships based on distribution of elements. If we perform similar function with multiple variables, we would have a parameter space that is not 2D. With 3 paramaters i.e. two input and one output feature, our fitting function would look like a plane as shown below:
 
