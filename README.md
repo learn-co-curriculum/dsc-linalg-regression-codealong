@@ -150,7 +150,7 @@ Let's assume that error will equal zero on average and forget it to sketch a pro
 
 > **y = X b**
 
-Now we want to solve for b, so we need to get rid of X. First we will make X into a nice square, symmetric matrix by emultiplying both sides of the equation by X<sup>T</sup>:
+Now we want to solve for b, so we need to get rid of X. First we will make X into a nice square, symmetric matrix by multiplying both sides of the equation by X<sup>T</sup>:
 
 > **X<sup>T</sup> y = X<sup>T</sup> X b**
 
