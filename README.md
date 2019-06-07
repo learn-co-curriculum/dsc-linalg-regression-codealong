@@ -236,7 +236,7 @@ There you have it, an approximated line function! Just like the one you saw with
 
 ## Regression with multiple variables
 
-ABove, you saw how you can craw a line on a 2D space using simple regression. If you perform a similar function with multiple variables, you can have a parameter space that is not 2D. With 3 parameters, i.e. two input and one output feature, the fitting function would not be a line, but would look like a plane:
+Above, you saw how you can draw a line on a 2D space using simple regression. If you perform a similar function with multiple variables, you can have a parameter space that is not 2D. With 3 parameters, i.e. two input and one output feature, the fitting function would not be a line, but would look like a plane:
 
 ![](http://www.clockbackward.com/wp-content/uploads/2009/06/points3DwPlane.png)
 
