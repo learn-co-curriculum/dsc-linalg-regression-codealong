@@ -61,7 +61,7 @@ $$y = mx+c$$
 
 where $c$ is the intercept of the line and $m$ denotes the slope, as shown below: 
 
-<img src="images/regr.jpg" width ="400">
+<img src="images/new_regression.png" width ="400">
 
 
 
