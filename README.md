@@ -50,7 +50,7 @@ plt.show()
 
 The purpose of linear regression would be to fit a mathematical model (a straight line) in the parameter space  that best describes the relationship between day and sales. Simple linear regression attempts to fit a line (in a 2 dimensional space) to describe the relationship between two variables as shown in the example below:
 
-<img src ="images/regr_line.png" width="500">
+<img src ="images/new_regr_line.png" width="500">
 
 
 Following this, if you were to identify a relationship between the day and total number of sales, the goal would be to seek a function that describes this line, and allows to linearly map input data points (day) or **independent variable** to outcome values (sales) or **dependent variable** .  If you do this, you first assume that there is an underlying relationship that maps “days” uniquely to “number of sales”, that can be written in the function form as an equation of the straight line i.e. 
@@ -238,7 +238,7 @@ There you have it, an approximated line function! Just like the one you saw with
 
 Above, you saw how you can draw a line on a 2D space using simple regression. If you perform a similar function with multiple variables, you can have a parameter space that is not 2D. With 3 parameters, i.e. two input and one output feature, the fitting function would not be a line, but would look like a plane:
 
-![](http://www.clockbackward.com/wp-content/uploads/2009/06/points3DwPlane.png)
+<img src="./images/new_LinRegresChart.png" width="600">
 
 When you have more than one input variables, each data point can be seen as is a feature vector $x_i$, composed of $x_1, x_2, \ldots , x_m$ , where $m$ is the total number of features (columns). For multiple regression, each data point can contain two or more features of the input. To represent all of the input data along with the vector of output values we set up a input matrix *X* and an output vector *y*. 
 
@@ -281,3 +281,8 @@ You're strongly advised to visit the following links to develop a strong mathema
 In this lesson, you had a gentle introduction to regression analysis and how we can use linear algebra to solve regression problems. you saw a toy example in the case of simple linear regression, relating days to number of sales and calculated a function that approximates the linear mapping.
 
 You also learned about how linear regression works in the context of multiple input variables and linear algebra. In the next lab, you'll use these equations to solve a real world problem. 
+
+
+```python
+
+```
