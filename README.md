@@ -3,7 +3,7 @@
 
 ## Introduction
 
-In the previous sections, you have learned that in statistical modeling, regression analysis is a set of statistical processes for estimating the relationships between data entities (variables). Linear regression is an important predictive analytical tool is considered routine analysis in data scientist's toolbox. Here, you'll try and develop a basic intuition for regression from a linear algebra perspective using vectors and matrices operations. This lesson covers least squares regression with matrix algebra without digging deep into the geometric dimensions. 
+In the previous sections, you have learned that in statistical modeling, regression analysis is a set of statistical processes for estimating the relationships between data entities (variables). Linear regression is an important predictive analytical tool is considered routine analysis in the data scientist's toolbox. Here, you'll try and develop a basic intuition for regression from a linear algebra perspective using vectors and matrices operations. This lesson covers least-squares regression with matrix algebra without digging deep into the geometric dimensions. 
 
 [You can find a deeper mathematical and geometric explanation of the topic here](http://math.mit.edu/~gs/linearalgebra/ila0403.pdf). In this lesson, we'll try to keep things more data-oriented.
 
@@ -18,9 +18,9 @@ You will be able to:
 
 ## Regression Analysis
 
-By now, you know that the purpose of the regression process is to fit a mathematical model to a set of observed points, in order to later use that model for predicting new values e.g. predicting sales, based on historical sales figures, predicting house prices based on different features of the house etc. 
+By now, you know that the purpose of the regression process is to fit a mathematical model to a set of observed points, in order to later use that model for predicting new values e.g. predicting sales, based on historical sales figures, predicting house prices based on different features of the house, etc. 
 
-Let's use a very simple toy example to understand how this works with linear algebra. Say you are collecting data on total number sales per day for some business. Imagine you've got three data points in the format: 
+Let's use a very simple toy example to understand how this works with linear algebra. Say you are collecting data on total number of sales per day for some business. Imagine you've got three data points in the format: 
 
 (day, total number of sales(in hundreds)) 
 
@@ -48,12 +48,12 @@ plt.show()
 
 ## Fitting a model to data - A quick refresher
 
-The purpose of linear regression would be to fit a mathematical model (a straight line) in the parameter space  that best describes the relationship between day and sales. Simple linear regression attempts to fit a line (in a 2 dimensional space) to describe the relationship between two variables as shown in the example below:
+The purpose of linear regression would be to fit a mathematical model (a straight line) in the parameter space  that best describes the relationship between day and sales. Simple linear regression attempts to fit a line (in a 2-dimensional space) to describe the relationship between two variables as shown in the example below:
 
 <img src ="images/new_regr_line.png" width="500">
 
 
-Following this, if you were to identify a relationship between the day and total number of sales, the goal would be to seek a function that describes this line, and allows to linearly map input data points (day) or **independent variable** to outcome values (sales) or **dependent variable** .  If you do this, you first assume that there is an underlying relationship that maps “days” uniquely to “number of sales”, that can be written in the function form as an equation of the straight line i.e. 
+Following this, if you were to identify a relationship between the day and total number of sales, the goal would be to seek a function that describes this line and allows us to linearly map input data points (day) or **independent variable** to outcome values (sales) or **dependent variable**.  If you do this, you first assume that there is an underlying relationship that maps “days” uniquely to “number of sales”, that can be written in the function form as an equation of the straight line i.e. 
 
 
 $$y = mx+c$$
@@ -65,7 +65,7 @@ where $c$ is the intercept of the line and $m$ denotes the slope, as shown below
 
 
 
-We can write the fitting function based on above as sales being a **function** of days.
+We can write the fitting function based on the above as sales being a **function** of days.
 
 $$ \text{sales} = f(\text{days})$$
 
