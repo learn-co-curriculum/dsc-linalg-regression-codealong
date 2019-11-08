@@ -1,9 +1,9 @@
 
-# Regression Analysis using Linear Algebra and Numpy - Code Along 
+# Regression Analysis using Linear Algebra and NumPy - Code Along 
 
 ## Introduction
 
-In the previous sections, you have learned that in statistical modeling, regression analysis is a set of statistical processes for estimating the relationships between data entities (variables). Linear regression is an important predictive analytical tool is considered routine analysis in the data scientist's toolbox. Here, you'll try and develop a basic intuition for regression from a linear algebra perspective using vectors and matrices operations. This lesson covers least-squares regression with matrix algebra without digging deep into the geometric dimensions. 
+In the previous sections, you learned that in statistical modeling, regression analysis is a set of statistical processes for estimating the relationships between data entities (variables). Linear regression is an important predictive analytical tool in the data scientist's toolbox. Here, you'll try and develop a basic intuition for regression from a linear algebra perspective using vectors and matrix operations. This lesson covers least-squares regression with matrix algebra without digging deep into the geometric dimensions. 
 
 [You can find a deeper mathematical and geometric explanation of the topic here](http://math.mit.edu/~gs/linearalgebra/ila0403.pdf). In this lesson, we'll try to keep things more data-oriented.
 
@@ -11,12 +11,11 @@ In the previous sections, you have learned that in statistical modeling, regress
 
 You will be able to: 
 
-* Understand the role of linear algebra towards regression modeling
-* Apply linear algebra to fit a function to data, describing linear mappings between input and output variables
-* Develop simple linear algebraic models for simple and multivariate regression
+- Apply linear algebra to fit a function to data, describing linear mappings between input and output variables
+- Indicate how linear algebra is related to regression modeling
 
 
-## Regression Analysis
+## Regression analysis
 
 By now, you know that the purpose of the regression process is to fit a mathematical model to a set of observed points, in order to later use that model for predicting new values e.g. predicting sales, based on historical sales figures, predicting house prices based on different features of the house, etc. 
 
@@ -73,11 +72,11 @@ $$ \text{sales} = f(\text{days})$$
 or, from $y= mx+c$
 
 $$\text{sales} = \text{days}*x + \text{intercept} $$
->(where **y** is the number of sales per day, **x** represents the day,  **C** (intercept) and **D** (slope) are the regression coefficients we are looking for hoping that these co-efficients will linearly map **day** to the **number of sales**)
+>(where **y** is the number of sales per day and **x** represents the day. **c** (intercept) and **m** (slope) are the regression coefficients we are looking for hoping that these co-efficients will linearly map **day** to the **number of sales**). 
 
 So using this, we can show our three data points ((1, 1) , (2, 2) , (3, 2)) as:
 
-> $ c + m*1 = 1$
+> $c + m*1 = 1$
 
 > $c + m*2 = 2$
 
@@ -87,21 +86,22 @@ So using this, we can show our three data points ((1, 1) , (2, 2) , (3, 2)) as:
 We can see that our data points do not lie on a line. The first two points make a perfect linear system. When $x = 1$, $y = 1$; and when $x = 2$, $y = 2$ i.e. we can draw a straight line passing through these points. When x = 3, b = 2, you know the three points do not lie on the same line as first two points, and our model will be an **approximation** i.e. 
 > there will be some error between the straight line and the REAL relationship between these parameters. 
 
-This behavior can be simulated by using Numpy's `polyfit()` function (similar to statsmodels ols) to draw a regression line to the data points as shown below. [Here is the documentation for np.polyfit()](https://docs.scipy.org/doc/numpy-1.15.0/reference/generated/numpy.polyfit.html). 
+This behavior can be simulated by using NumPy's `polyfit()` function (similar to `statsmodels.ols`) to draw a regression line to the data points as shown below. [Here is the documentation for np.polyfit()](https://docs.scipy.org/doc/numpy-1.15.0/reference/generated/numpy.polyfit.html). 
 
 ```python
 from numpy.polynomial.polynomial import polyfit
 
-# Fit with polyfit function to get m(intercept) and b(slope) . the degree parameter = 1 to show astraight line
-b, m = polyfit(x, y, 1)
+# Fit with polyfit function to get c(intercept) and m(slope)
+# the degree parameter = 1 to models this as a straight line
+c, m = polyfit(x, y, 1)
 
 # Plot the data points and line calculated from ployfit
 plt.plot(x, y, 'o')
-plt.plot(x, b + (m * x), '-')
+plt.plot(x, c + (m * x), '-')
 plt.xticks(x)
 
 plt.show()
-print (b,m)
+print(b,m)
 ```
 
 
@@ -111,13 +111,13 @@ print (b,m)
 
 The numbers obtained here reflect the slope (0.5) and intercept values (0.66). 
 
-The line drawn above using this built-in regression model clearly doesn't touch all the data points. As a result, this is an **approximation** of the function you're trying to find. Now let's see how to achieve the same functionality with matrix algebra instead of the polyfit function. 
+The line drawn above using this built-in regression model clearly doesn't touch all the data points. As a result, this is an **approximation** of the function you're trying to find. Now let's see how to achieve the same functionality with matrix algebra instead of the `polyfit()` function. 
 
 ## Create matrices and vectors
 
 A linear system like the one above can be solved using linear algebra! You only need to deal with a few vectors and matrices to set this up.
 
-Recalling a linear systems from the previous lesson, you have:
+Recalling linear systems from the previous lessons, you have:
 
 
 $$
@@ -140,7 +140,7 @@ $$
 
 ## The intercept and error terms
 
-The column of ones in the first matrix refers the intercept ($c$) from $mx+c$. If you don't include this constant, then the function will is constrained to the origin (0,0), which would strongly limit the types of relationships the model could describe. You want to include an intercept to allow for linear models to intersect with the $y$-axis at values different from 0 (in the image shown earlier, $c$ was 2, because the straight line crossed the $y$-axis at $y$=2).
+The column of ones in the first matrix refers to the intercept ($c$) from $mx+c$. If you don't include this constant, then the function is constrained to the origin (0,0), which would strongly limit the types of relationships the model could describe. You want to include an intercept to allow for linear models to intersect with the $y$-axis at values different from 0 (in the image shown earlier, $c$ was 2, because the straight line crossed the $y$-axis at $y$=2).
 
 In above , we are hoping that there is some linear combination of the columns of the first matrix that gives us our vector of observed values (the vector with values 1,2,2).
 
@@ -152,20 +152,20 @@ Unfortunately, we already know that this vector does not fit our model perfectly
 
 A common measure to find and minimize the value of this error is called *Ordinary Least Squares*. 
 
-This says that our dependent variable, is composed of a linear part and error. The linear part is composed of an intercept, a and independent variable(s),along with their associated raw score regression weights.
+This says that our dependent variable, is composed of a linear part and error. The linear part is composed of an intercept and independent variable(s), along with their associated raw score regression weights.
 
-In matrix terms, the same equation can be written:
+In matrix terms, the same equation can be written as:
 
 $ y = \boldsymbol{X} b + e $
 
-This says to get y (sales), multiply each $\boldsymbol{X}$ by the appropriate vector b (unknown parameters, the vector version of $m$ and $c$), then add an error term. We create a matrix $\boldsymbol{X}$ , which has an extra column of 1s in it for the intercept. For each day, the 1 is used to add the intercept in the first row of the column vector $b$.
+This says to get y (sales), multiply each $\boldsymbol{X}$ by the appropriate vector b (unknown parameters, the vector version of $m$ and $c$), then add an error term. We create a matrix $\boldsymbol{X}$ , which has an extra column of **1**s in it for the intercept. For each day, the **1** is used to add the intercept in the first row of the column vector $b$.
 
 Let's assume that the error is equal to zero on average and drop it to sketch a proof:
 
 $ y = \boldsymbol{X} b$
 
 
-Now let's solve for $b$, so we need to get rid of $\boldsymbol{X}$ . First we will make X into a nice square, symmetric matrix by multiplying both sides of the equation by $\boldsymbol{X}^T$ :
+Now let's solve for $b$, so we need to get rid of $\boldsymbol{X}$. First we will make X into a nice square, symmetric matrix by multiplying both sides of the equation by $\boldsymbol{X}^T$ :
 
 $\boldsymbol{X}^T y = \boldsymbol{X}^T \boldsymbol{X}b $
 
@@ -183,7 +183,7 @@ And you know that $Ib= b$ So if you want to solve for $b$ (that is, remember, eq
 
 $ b= (\boldsymbol{X}^T\boldsymbol{X})^{-1}\boldsymbol{X}^T y $
 
-Here, we'll focus on the matrix and vector algebra perspective. With least squares regression, in order to solve for the expected value of weights, referred to as $\hat{X}$ ("$X$-hat"), you need to solve the above equation
+Here, we'll focus on the matrix and vector algebra perspective. With least squares regression, in order to solve for the expected value of weights, referred to as $\hat{X}$ ("$X$-hat"), you need to solve the above equation. 
 
 Remember all above variables represent vectors. The elements of the vector X-hat are the estimated regression coefficients $c$ and $m$ that you're looking for. They minimize the error between the model and the observed data in an elegant way that uses no calculus or complicated algebraic sums.
 
@@ -193,12 +193,12 @@ The above description can be summarized as:
 
 ## Calculate an OLS regression line
 
-Let's use above formula to calculate a solution for our toy problem
+Let's use the above formula to calculate a solution for our toy problem: 
 ```python
 # Calculate the solution
 
-X = np.array([[1,1],[1,2],[1,3]])
-y = np.array([1,2,2])
+X = np.array([[1, 1],[1, 2],[1, 3]])
+y = np.array([1, 2, 2])
 Xt = X.T
 XtX = Xt.dot(X)
 XtX_inv = np.linalg.inv(XtX)
@@ -212,12 +212,12 @@ x_hat
 # Code here 
 ```
 
-The solution gives an intercept of 0.6 and slope value 0.5. Let's see what you get if you draw a line with these values with given data.
+The solution gives an intercept of 0.6 and slope value 0.5. Let's see what you get if you draw a line with these values with given data: 
 
 ```python
 # Define data points
-x = np.array([1,2,3])
-y = np.array([1,2,2])
+x = np.array([1, 2, 3])
+y = np.array([1, 2, 2])
 
 # Plot the data points and line parameters calculated above
 plt.plot(x, y, 'o')
@@ -232,7 +232,7 @@ plt.show()
 # Code here 
 ```
 
-There you have it, an approximated line function! Just like the one you saw with polyfit, by using simple matrix algebra. 
+There you have it, an approximated line function! Just like the one you saw with `polyfit()`, by using simple matrix algebra. 
 
 ## Regression with multiple variables
 
@@ -240,16 +240,16 @@ Above, you saw how you can draw a line on a 2D space using simple regression. If
 
 <img src="./images/new_LinRegresChart.png" width="600">
 
-When you have more than one input variables, each data point can be seen as is a feature vector $x_i$, composed of $x_1, x_2, \ldots , x_m$ , where $m$ is the total number of features (columns). For multiple regression, each data point can contain two or more features of the input. To represent all of the input data along with the vector of output values we set up a input matrix *X* and an output vector *y*. 
+When you have more than one input variable, each data point can be seen as a feature vector $x_i$, composed of $x_1, x_2, \ldots , x_m$ , where $m$ is the total number of features (columns). For multiple regression, each data point can contain two or more features of the input. To represent all of the input data along with the vector of output values we set up a input matrix *X* and an output vector *y*. 
 
 you can write this in general terms, as you saw earlier:
  
 > $\boldsymbol{X} \beta \approx y$
 
 
-Where *X* are the input feature values, $\beta$ represents the co-efficients and *y* is the output (value to be predicted). In a simple least-squares linear regression model you are looking for a vector $\beta$ so that the product $X \beta$ most closely approximates the outcome vector y.
+Where *X* are the input feature values, $\beta$ represents the coefficients and *y* is the output (value to be predicted). In a simple least-squares linear regression model you are looking for a vector $\beta$ so that the product $X \beta$ most closely approximates the outcome vector y.
 
-For each value of input features $x_i$, we can compute a predicted outcome value  as:
+For each value of input features $x_i$, we can compute a predicted outcome value as:
 
 observed data $\rightarrow$ $y = b_0+b_1x_1+b_2x_2+ \ldots + b_px_p+ \epsilon $
 
@@ -266,7 +266,7 @@ So you see that the general solution involves taking a matrix transpose, the inv
 
 In the next lab, you'll use a simple dataset and with the above formulation for multivariate regression, you'll try to fit a model to the data and see how well it performs. 
 
-## Further Reading
+## Further reading
 
 You're strongly advised to visit the following links to develop a strong mathematical and geometrical intuition around how least squares work. These documents will provide you with a visual intuition as well as an in-depth mathematical formulation for above equations along with their proofs. 
 
@@ -278,11 +278,6 @@ You're strongly advised to visit the following links to develop a strong mathema
 
 ## Summary
 
-In this lesson, you had a gentle introduction to regression analysis and how we can use linear algebra to solve regression problems. you saw a toy example in the case of simple linear regression, relating days to number of sales and calculated a function that approximates the linear mapping.
+In this lesson, you had a gentle introduction to how we can use linear algebra to solve regression problems. You saw a toy example in the case of simple linear regression, relating days to number of sales and calculated a function that approximates the linear mapping.
 
 You also learned about how linear regression works in the context of multiple input variables and linear algebra. In the next lab, you'll use these equations to solve a real world problem. 
-
-
-```python
-
-```
