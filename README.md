@@ -101,7 +101,7 @@ plt.plot(x, c + (m * x), '-')
 plt.xticks(x)
 
 plt.show()
-print(b,m)
+print(c, m)
 ```
 
 
